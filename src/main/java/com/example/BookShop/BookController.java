@@ -3,12 +3,17 @@ package com.example.BookShop;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.PostMapping;
+// import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+// import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
+
+@CrossOrigin(origins = "http://127.0.0.1:3000") // Enable CORS for this controller
 public class BookController {
     private final BookService bookService;
 
@@ -17,16 +22,16 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @PostMapping("/books")
-    public void addBook(@RequestBody Book book) {
-        System.out.println(book.getPrice());
-        bookService.saveBook(book);
-        // return "YOu made it here!";
+
+    @GetMapping("/books")
+    public List<Book> addBook(@RequestParam(name="title") String title) {
+        return bookService.findByTitle(title);
+
 
     }
 
-    @GetMapping("/get")
-    public List<Book> getStart(){
-        return bookService.getAllBooks();
-    }
+    @GetMapping("/All")
+    public List<Book> getAllBooks(){
+        return bookService.getAll();
+    }    
 }

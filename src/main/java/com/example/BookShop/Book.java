@@ -12,6 +12,7 @@ public class Book {
     private String publisher;
     private double price;
     private String author;
+    private String image; 
 
     public Book(){}
 
@@ -69,6 +70,13 @@ public class Book {
         if(price > -1.0){
             this.price = price;
         }
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String toString(){
